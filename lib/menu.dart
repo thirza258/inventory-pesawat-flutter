@@ -4,9 +4,9 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
   final List<InventoryItem> items = [
-    InventoryItem("Lihat Item", Icons.checklist),
-    InventoryItem("Tambah Item", Icons.add_shopping_cart),
-    InventoryItem("Logout", Icons.logout),
+    InventoryItem("Lihat Item", Icons.checklist, Colors.blue),
+    InventoryItem("Tambah Item", Icons.add_shopping_cart, Colors.red),
+    InventoryItem("Logout", Icons.logout, Colors.green),
   ];
 
   @override
@@ -63,8 +63,9 @@ class MyHomePage extends StatelessWidget {
 class InventoryItem {
   final String name;
   final IconData icon;
+  final Color color;
 
-  InventoryItem(this.name, this.icon);
+  InventoryItem(this.name, this.icon, this.color);
 }
 
 class InventoryCard extends StatelessWidget {
@@ -75,7 +76,7 @@ class InventoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.blueAccent,
+      color: item.color,
       child: InkWell(
         // Area responsive terhadap sentuhan
         onTap: () {
