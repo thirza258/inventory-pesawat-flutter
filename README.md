@@ -29,7 +29,7 @@
 
 2. **Scaffold**: Ini menyediakan struktur tampilan dasar untuk aplikasi Material Design, termasuk AppBar, body, dan floating action buttons.
 
-3. **AppBar**: Ini adalah bar di bagian atas layar yang biasanya menampilkan judul dan actions.
+3. **AppBar**: Ini adalah bar bagian atas layar yang biasanya menampilkan judul dan actions.
 
 4. **Text**: Widget untuk menampilkan teks seperti tag `<p>` namun dapat diubah/distyling dapat menjadi `<h1>` lagi menjad pada aplikasi.
 
@@ -54,6 +54,7 @@
 14. **Center**: Menjadikan childnya berada di tengah secara horizontal dan vertikal.
 
 15. **ThemeData**: Digunakan untuk menentukan data tema untuk MaterialApp, memungkinkan penggunaan tema secara keseluruhan pada aplikasi.
+16. **MyHomePage**: WIdget yang didefinisikan sebagai widget buatan melalui class MyHomePage. Class ini berisi widget widget yang didefinisikan di file.
 
 **Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)**
 
