@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_pesawat/menu.dart';
+import 'package:inventory_pesawat/screens/menu.dart';
 
 void main() {
   runApp(const MyApp());

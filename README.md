@@ -13,6 +13,8 @@
   - [**Daftar Isi**:](#daftar-isi)
   - [**Tugas 7**](#tugas-7)
     - [**Elemen Dasar Flutter**](#elemen-dasar-flutter)
+  - [**Tugas 8**](#tugas-8)
+    - [Flutter Navigation, Layouts, Forms, and Input Elements](#flutter-navigation-layouts-forms-and-input-elements)
 
 ---
 ## **Tugas 7**
@@ -171,3 +173,127 @@ Membuat tiga tombol sederhana dengan ikon dan teks untuk:
    - Melakukan `git add . ` lalu `git commit -m "Tugas 7 pengerjaan 2" ` dan `git push origin main` untuk mengupload ke github.
  - Kamu akan mendapatkan nilai bonus pada penilaian tugas ini apabila kamu mengimplementasikan warna-warna yang berbeda untuk setiap tombol (Lihat Item, Tambah Item, dan Logout).
    - Menambahkan Color di class Inventory Item `final Color color` lalu setiap dan memintacolor pada constructor dan ketika membuat list InventoryItem di main page menambahkan warna yang berbeda-beda untuk setiap itemnya.
+
+---
+## **Tugas 8**
+### Flutter Navigation, Layouts, Forms, and Input Elements
+
+**Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!**
+- `Navigator.push()` adalah menambahkan suatu halaman atau rute ke suatu stack navigator. Jadi ketika menambahkan `push()` maka akan menambahkan halaman baru ke dalam stack navigator. Jadi dapat kembali ke halaman sebelumnya dengan tombol back.
+- `Navigator.push()` dapat digunakan untuk misalnya halaman halaman daftar item lalu kita dapat menambahkan halaman detail item dengan `Navigator.push()` dan dapat kembali ke halaman daftar item dengan tombol back.
+- `Navigator.pushReplacement()` Mengganti halaman dengan halaman baru. Jadi Halaman tidak ditumpuk dengan stack melainkan menjadi halaman yang baru. Jadi tidak dapat kembali ke halaman sebelumnya dengan tombol back.
+- `Navigator.pushReplacement()` dapat digunakan untuk halaman login dan registrasi yang langsung masuk ke halaman utama. Ketika di Halaman utama hampir tidak mungkin untuk kembali ke halaman login dengan tombol back.
+
+**Bagaimana penerapan clean architecture pada aplikasi Flutter?**
+- Membagi aplikasi flutter menjadi Presentation Layer, Data Layer, dan Domain Layer.
+- Pada Presentation Layer terdapat UI dan Business Logic. Membuat folder screens untuk yang beirsi file yang mendefinisikan halaman dan layar dari aplikasi. Lalu juga menggunakan folder widgets yang berisi widget widget yang digunakan di aplikasi. Lalu juga menggunakan folder bloc yang berisi file file yang berisi business logic dari aplikasi. Menggunakan Flutter widget tree untuk mendefinisikan komponen UI.
+- Pada Domain Layer terdapat folder domain yang bersi file file yang mendefinisikan model atau class spesifik. Lalu juga mendefinisikan entity yang berisi class class objek dari aplikasi. Menggunakan use cases untuk mendefinisikan fungsi fungsi yang dapat digunakan di aplikasi.
+- Pada Data layer terdapat folder data untuk yang berisi class yang mendefinisikan data yang digunakan aplikasi. Mendefinisikan folder repositories untuk interface repository. Mengimplementasi asal data yang berinteraksi dengan layanan external atau database.
+  
+**Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!**
+  1. Align dapat digunakan untuk mengatur posisi dari widget yang ada di dalamnya. Seperti menengahkan widget atau mengatur posisi widget di dalamnya.
+  2. Padding dapat digunakan untuk memberikan ruang kosong disekitar widget kita. Seperti memberikan jarak kosong di sekitar widget.
+  3. ListView: Sebuah widget scrollable yang digunakan untuk menampilkan daftar item secara vertikal. Misalnya dibuat daftar item yang dapat di scroll.
+  4. Column dapat digunakan untuk menyusun daftar dalam tabel secara vertikal. Misalnya membuat tabel yang berisi daftar item.
+  5. GridView dapat digunakan untuk menyusun daftar dalam tabel secara horizontal. Misalnya membuat tabel yang berisi daftar item secara menyamping.
+  6. Container dapat digunakan untuk mengelompokkan serangkaian widget lainnya, sering digunakan untuk styling dan positioning. Misalnya membuat kotak yang berisi daftar item.
+
+**Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!**
+1. TextFormField: Digunakan untuk membuat form field yang berisi teks. Digunakan untuk membuat form field yang berisi teks.
+2. Checkbox: Digunakan untuk membuat form field yang berisi checkbox yang mendefinisikan nilai boolean.
+
+**Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)**
+
+[1] Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru dengan ketentuan sebagai berikut.
+- Membuat halaman baru di file tambah_item.dart. lalu membuat class TambahItemForm untuk formulir tambah_item.
+
+ [2] Memakai minimal tiga elemen input, yaitu name, amount, description. Tambahkan elemen input sesuai dengan model pada aplikasi tugas Django yang telah kamu buat.
+- Membuat variabel name, amount, description, engine, winglet, image yang sesuai dengan project tugas Django. Lalu membuat TextFormField untuk variabel name, description, amount, engine, dan image. Lalu CheckBox untuk winglet.
+ [3] Memiliki sebuah tombol Save.
+- Membuat tombol save yang ketika ditekan akan menampilkan pop up yang berisi data yang diisi di form.
+
+ [4] Setiap elemen input di formulir juga harus divalidasi dengan ketentuan sebagai berikut:
+
+ - [5] Setiap elemen input tidak boleh kosong.
+  - Membuat validator untuk setiap TextFormField yang memeriksa apakah TextFormField tersebut kosong atau tidak.
+  ```
+  validator: (value) {
+    if (value == null || value.isEmpty) {
+      return 'Tidak boleh kosong!';
+    }
+    return null;
+  },
+  ```
+ - [6] Setiap elemen input harus berisi data dengan tipe data atribut modelnya.
+  - Membuat validator untuk setiap TextFormField yang memeriksa apakah TextFormField tersebut sesuai dengan tipe data yang diminta.
+  ```
+    if (int.tryParse(value) == null) {
+      return "Amount harus berupa angka!";
+    }
+  ```
+ [7] Mengarahkan pengguna ke halaman form tambah item baru ketika menekan tombol Tambah Item pada halaman utama.
+  - Membuat tombol Tambah Item yang ada pada Tugas 7. Ada pada class InventoryCard. Lalu menambahkan `Navigator.push()` yang mengarahkan ke halaman tambah item baru.
+  ```
+  if (item.name == "Tambah Item") {
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ItemFormPage()));
+          }
+  ```
+
+ [8] Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah pop-up setelah menekan tombol Save pada halaman formulir tambah item baru.
+- Membuat tombol save yang ketika ditekan akan menampilkan pop up yang berisi data yang diisi di form. Dengan menggunakan `showDialog()` yang berisi `AlertDialog()` yang berisi `Text()` yang berisi data yang diisi di form.
+  ```
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Data yang diisi"),
+        content: Text(
+            "Name: ${nameController.text}\nAmount: ${amountController.text}\nDescription: ${descriptionController.text}\nEngine: ${engineController.text}\nWinglet: ${wingletController.text}\nImage: ${imageController.text}"),
+        actions: [
+          TextButton(
+            child: Text("OK"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+  ```
+
+ [9] Membuat sebuah drawer pada aplikasi dengan ketentuan sebagai berikut:
+ - [10] Drawer minimal memiliki dua buah opsi, yaitu Halaman Utama dan Tambah Item.
+   - Membuat file left_drawer.dart. 
+   - Membuat ListTile yang berisi `Icon()` dan `Text()` yang berisi opsi Halaman Utama dan Tambah Item. Salah satu List dinamakan Tambah Item dan yang kedua adalah Halaman Utama.
+ - [11] Ketika memiih opsi Halaman Utama, maka aplikasi akan mengarahkan pengguna ke halaman utama.
+   - Menambahkan `Navigator.pushReplacement()` yang mengarahkan ke halaman utama.
+   ```
+    if (item.name == "Halaman Utama") {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MyHomePage(title: "Inventory Pesawat")));
+            }
+    ```
+ - [12] Ketika memiih opsi (Tambah Item), maka aplikasi akan mengarahkan pengguna ke halaman form tambah item baru.
+   - Menambahkan `Navigator.pushReplacement()` yang mengarahkan ke halaman tambah item baru.
+   ```
+    if (item.name == "Tambah Item") {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ItemFormPage()));
+            }
+    ``` 
+[13] Melakukan add-commit-push ke GitHub. 
+  - Melakukan `git add .` lalu `git commit -m "mengerjakan tugas 8"` dan `git push origin main` untuk mengupload ke github.
+
+[14] Membuat sebuah halaman baru, yaitu halaman daftar item yang sudah dibuat dengan isi halamannya adalah setiap data produk yang sudah pernah dibuat.
+  - Membuat file daftar_item.dart lalu menambahkan Class Daftar Item yang berisi ListTile dari item yang sudah dibuat. ListTile mengambil item dari List yang ada pada class Item. Lalu Itemnya diterjemahkan menjadi Item Item yang ada di produk.
+
+[15] Mengarahkan pengguna ke halaman tersebut jika menekan tombol Lihat Produk pada halaman utama atau drawer.
+  - Menambahkan `Material.push` di menu.dart pada bagian `if (item.name == "Lihat Item")` yang mengarahkan ke halaman daftar item.
+  ```
