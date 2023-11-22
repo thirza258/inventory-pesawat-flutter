@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:inventory_pesawat/screens/daftar_item.dart';
 import 'package:inventory_pesawat/screens/menu.dart';
 import 'package:inventory_pesawat/screens/tambah_item.dart';
+import 'package:inventory_pesawat/models/items.dart';
+import 'package:inventory_pesawat/screens/list_item.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -69,6 +71,17 @@ class LeftDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => DaftarItem())
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.shopping_basket),
+            title: const Text('Daftar Item'),
+            onTap: () {
+              // Route menu ke halaman produk
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ItemPage()),
               );
             },
           ),

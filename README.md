@@ -15,6 +15,8 @@
     - [**Elemen Dasar Flutter**](#elemen-dasar-flutter)
   - [**Tugas 8**](#tugas-8)
     - [Flutter Navigation, Layouts, Forms, and Input Elements](#flutter-navigation-layouts-forms-and-input-elements)
+  - [**Tugas 9**](#tugas-9)
+    - [**Integrasi Layanan Web Django dengan Aplikasi Flutter**](#integrasi-layanan-web-django-dengan-aplikasi-flutter)
 
 ---
 ## **Tugas 7**
@@ -296,4 +298,48 @@ Membuat tiga tombol sederhana dengan ikon dan teks untuk:
 
 [15] Mengarahkan pengguna ke halaman tersebut jika menekan tombol Lihat Produk pada halaman utama atau drawer.
   - Menambahkan `Material.push` di menu.dart pada bagian `if (item.name == "Lihat Item")` yang mengarahkan ke halaman daftar item.
-  ```
+  - 
+---
+## **Tugas 9**
+### **Integrasi Layanan Web Django dengan Aplikasi Flutter**
+
+**Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?**
+- Bisa, tetapi tidak disarankan, kita dapat membuat pengambilan data dengan JSON dengan dibuat struktur data map atau dictionary. Pembuatan model sebelum melakukan pengambilan data JSON selalu lebih baik daripada tanpa membuat model hal ini dikarenakan kita dapat melakukan validasi data, dapat auto complete atau melihat kesalahan saat compile time, mudah untuk melakukan debugging, dan aman pada tipe data *type safety*.
+
+**Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.**
+- CookieRequest adalah class yang digunakan untuk melakukan request ke server. CookieRequest perlu dibagikan ke semua komponen di aplikasi Flutter karena CookieRequest digunakan untuk melakukan request ke server dan mendapatkan data dari server. Jadi CookieRequest perlu dibagikan ke semua komponen di aplikasi Flutter agar dapat melakukan request ke server dan mendapatkan data dari server.
+
+**Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter.**
+- Pertama menambahkan package http di flutter untuk membuat permintaan http. Di enpoint itu ada data JSON. Jadi diminta ke url itu. Setelah diberi JSON flutter mengurai data json tersebut dengan `jsonDecode` dari `dart:convert`.
+- Mendefinisikan model yang sesuai dengan daya json. Lalu dijadikan map dengan fromJson. Lalu disesuaikan dengan data JSONnya.
+- Setelah itu data dapat ditambilkan dengan `FutureBuilder` yang mengambil data dari model yang telah dibuat. Lalu menampilkan data tersebut misal dengan `ListView`.
+
+**Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.**
+- Membuat file dart untuk login. Lalu membuat class yang menangani login di login.dart. Mendefinisiakn textfiled yang mengarah ke textediting controller. Mengecek username dan password yang diisi. Jika benar maka masuk. Di django membuat fungsi login dengan authenticate yang memastikan username dan password benar sehingga dapat masuk ke halaman.
+
+**Sebutkan seluruh widget yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.**
+- TextField digunakan untuk membuat form field yang berisi teks.
+- TextEditingController digunakan untuk mengontrol TextField.
+- ElevatedButton digunakan untuk membuat tombol yang berisi teks.
+- SizedBox digunakan untuk membuat kotak yang berisi widget lainnya.
+- Text digunakan untuk membuat teks.
+- FutureBuilder digunakan untuk membuat widget yang membangun dirinya sendiri berdasarkan nilai dari future.
+- ListView digunakan untuk membuat daftar item yang dapat di scroll.
+- ListTile digunakan untuk membuat daftar item yang dapat di scroll.
+- Icon digunakan untuk membuat icon.
+
+**Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step!**
+[1] Memastikan deployment proyek tugas Django kamu telah berjalan dengan baik.
+- Melakukan deployment di proyek django dan memastikan deployment berjalan dengan baik. terutama pada endpoint yang mengembalikan JSON.
+
+[2]  Membuat halaman login pada proyek tugas Flutter.
+- Membuat halaman login di Login.dart dan membuat class Login pada login dart di situ meminta username dan password lalu mengirimkan ke server django apakah benar atau tidak.
+
+[3]  Mengintegrasikan sistem autentikasi Django dengan proyek tugas Flutter.
+- melakukan await request login di url yang sesuai dengan authentisikasi django dan memasukkan username dan password yang diisi ke request.
+
+[4] Membuat model kustom sesuai dengan proyek aplikasi Django.
+- Membuat model kustom di items.dart yang berisi model yang sesuai dengan proyek django. 
+
+[5] 
+
