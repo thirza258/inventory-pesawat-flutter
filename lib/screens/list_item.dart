@@ -14,8 +14,8 @@ class ItemPage extends StatefulWidget {
 class _ItemPageState extends State<ItemPage> {
   Future<List<Item>> fetchProduct() async {
     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-    var url = Uri.parse(
-        'http://<URL_APP_KAMU>/json/');
+    var url = Uri.parse('http://127.0.0.1:8000/json/');
+    // var url = Uri.parse('https:thirza-ahmad-tugas.pbp.cs.ui.ac.id/json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -53,7 +53,7 @@ class _ItemPageState extends State<ItemPage> {
                       Text(
                         "Tidak ada data produk.",
                         style:
-                        TextStyle(color: Color(0xff59A5D8), fontSize: 20),
+                            TextStyle(color: Color(0xff59A5D8), fontSize: 20),
                       ),
                       SizedBox(height: 8),
                     ],
@@ -61,31 +61,89 @@ class _ItemPageState extends State<ItemPage> {
                 } else {
                   return ListView.builder(
                       itemCount: snapshot.data!.length,
-                      itemBuilder: (_, index) => Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 12),
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "${snapshot.data![index].fields.name}",
-                              style: const TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
+                      itemBuilder: (_, index) => GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ItemDetailPage(item: snapshot.data![index]),
                               ),
+                            );
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 12),
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${snapshot.data![index].fields.name}",
+                                  style: const TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Text("${snapshot.data![index].fields.amount}"),
+                                const SizedBox(height: 10),
+                                Text(
+                                    "${snapshot.data![index].fields.description}")
+                              ],
                             ),
-                            const SizedBox(height: 10),
-                            Text("${snapshot.data![index].fields.amount}"),
-                            const SizedBox(height: 10),
-                            Text(
-                                "${snapshot.data![index].fields.description}")
-                          ],
-                        ),
-                      ));
+                          )));
                 }
               }
             }));
+  }
+}
+
+class ItemDetailPage extends StatelessWidget {
+  final Item item;
+
+  ItemDetailPage({required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text('Detail Item'),
+      ),
+
+      body: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "${item.fields.name}",
+              style: const TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text("Jumlah : ${item.fields.amount}"),
+            const SizedBox(height: 10),
+            Text("Deskripsi : ${item.fields.description}"),
+            const SizedBox(height: 10),
+            Text("Status Winglet : ${item.fields.winglet}"),
+            const SizedBox(height: 10),
+            Text("Tipe Engine : ${item.fields.engine}"),
+            const SizedBox(height: 10),
+            Text("Gambar Pesawat"),
+            Image.network("${item.fields.image}", width: 200, height: 200)
+          ],
+        ),
+      ),
+    );
   }
 }

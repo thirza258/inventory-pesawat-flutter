@@ -341,5 +341,23 @@ Membuat tiga tombol sederhana dengan ikon dan teks untuk:
 [4] Membuat model kustom sesuai dengan proyek aplikasi Django.
 - Membuat model kustom di items.dart yang berisi model yang sesuai dengan proyek django. 
 
-[5] 
+[5]  Membuat halaman yang berisi daftar semua item yang terdapat pada endpoint JSON di Django yang telah kamu deploy
+- Halaman di list_item.dart adalah file untuk menambilkan daftar item yang sudah dibuat di django. Lalu menampilkan daftar item tersebut dengan ListView dan ListTile.
 
+[6] Tampilkan name, amount, dan description dari masing-masing item pada halaman ini.
+- Menampilkan name, amount, dan description dari masing-masing item pada halaman ini dengan ListTile yang berisi Text yang berisi name, amount, dan description. name dan amount ini didapat dari JSON yang dikembalikan oleh endpoint.
+
+[7]  Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item.
+- Membuat halaman detail yaitu pada ItemDetailPage class lalu di class itu mengextend Stateless widget.
+- Halaman ini akan meminta detail item dan menampilkan atribut lain dari item yang ditampilkan
+
+[8]  Halaman ini dapat diakses dengan menekan salah satu item pada halaman daftar Item.
+- Menambahkan Gesture Detector yang diasosisasikan dengan setiap item sesuai indexnya lalu memastukkan item ke ItemDetailPage untuk ditampilkan.
+
+[9] Tampilkan seluruh atribut pada model item kamu pada halaman ini
+- Menampilkan seluruh detail item seperti name, amount, description, engine, winglet, dan image. Dengan ListTile yang berisi Text yang berisi name, amount, description, engine, winglet, dan image. name, amount, dan description ini didapat dari JSON yang dikembalikan oleh endpoint.
+
+[10] Tambahkan tombol untuk kembali ke halaman daftar item.
+- Menambahkan leading di AppBar yang berisi icon arrow back yang ketika ditekan akan melakukan `pop(context)` yang akan kembali ke halaman sebelumnya.
+
+[11] 
